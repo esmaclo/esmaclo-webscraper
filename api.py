@@ -2,7 +2,6 @@ from flask import Flask, Response, request
 from flask_cors import CORS
 import json
 
-
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver.chrome.options import Options
