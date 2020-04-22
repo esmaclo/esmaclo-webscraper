@@ -3,3 +3,4 @@ bs4
 requests
 flask
 flask_cors
+gunicorn
