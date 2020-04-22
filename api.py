@@ -2,6 +2,7 @@ from flask import Flask, Response, request
 from flask_cors import CORS
 import json
 
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver.chrome.options import Options
@@ -46,7 +47,11 @@ def index():
 
 @app.route("/api/scrape", methods=['POST'])
 def scrape():
-    url = request.json.get('url')
+    if request.json is None:
+        error = {"Error": "Missing url"}
+        return Response(json.dumps(error), status=400, mimetype='application/json')
+
+    url = request.json.get('url', None)
     print(url)
     element = scrape_amazon_price(url)
 
