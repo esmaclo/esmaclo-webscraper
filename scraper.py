@@ -26,8 +26,8 @@ app = Flask(__name__)
 CORS(app)
 
 
-# url = 'https://www.amazon.es/dp/B006CZ0LGA'
-# driver.get(url)
+url = 'https://www.amazon.es/dp/B006CZ0LGA'
+driver.get(url)
 
 
 def scrape_amazon_price(url):
