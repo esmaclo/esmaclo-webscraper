@@ -14,6 +14,7 @@ BOT_URL = f'https://api.telegram.org/bot{os.environ["BOT_KEY"]}/'
 CHAT_ID = 274429781
 DELAY = 60
 NUM_OF_TIMES = 10
+PRICE_UNDER = 30,0
 URL = 'https://www.amazon.es/dp/B07X8CVLRP'
 
 options = Options()
@@ -58,13 +59,20 @@ def scrape():
 
         status = 200 if element is not None else 412
 
-        json_data = {
-            "chat_id": CHAT_ID,
-            "text": element,
-        }
+        if status == 200:
 
-        message_url = BOT_URL + 'sendMessage'
-        requests.post(message_url, json=json_data)
+            element = element.replace(",",".")
+            element = element.replace(" €","")
+
+            if float(elements) < PRICE_UNDER:
+
+                json_data = {
+                    "chat_id": CHAT_ID,
+                    "text": element,
+                }
+
+                message_url = BOT_URL + 'sendMessage'
+                requests.post(message_url, json=json_data)
 
         time.sleep(DELAY)
         i += 1
