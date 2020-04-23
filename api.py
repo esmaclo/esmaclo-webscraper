@@ -10,6 +10,7 @@ import os
 
 CHROMEDRIVER_PATH = os.environ.get('CHROMEDRIVER_PATH', '/usr/local/bin/chromedriver')
 GOOGLE_CHROME_BIN = os.environ.get('GOOGLE_CHROME_BIN', '/usr/bin/google-chrome')
+BOT_URL = f'https://api.telegram.org/bot{os.environ["BOT_KEY"]}/'
 
 
 options = Options()
@@ -51,14 +52,30 @@ def scrape():
         error = {"Error": "Missing url"}
         return Response(json.dumps(error), status=400, mimetype='application/json')
 
-    url = request.json.get('url', None)
-    print(url)
-    element = scrape_amazon_price(url)
+    data = request.json
+
+    print(data)  # Comment to hide what Telegram is sending you
+    chat_id = data['message']['chat']['id']
+    message = data['message']['text']
+
+    #url = request.json.get('url', None)
+    #print(url)
+    element = scrape_amazon_price(message)
 
     status = 200 if element is not None else 412
-    response = json.dumps({'Price': element})
 
-    return Response(response=response, status=status, mimetype='application/json')
+    json_data = {
+        "chat_id": chat_id,
+        "text": element,
+    }
+
+    message_url = BOT_URL + 'sendMessage'
+    requests.post(message_url, json=json_data)
+
+    #response = json.dumps({'Price': element})
+
+    #return Response(response=response, status=status, mimetype='application/json')
+    return ''
 
 
 if __name__ == '__main__':
