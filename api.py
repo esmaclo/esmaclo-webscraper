@@ -64,7 +64,6 @@ def scrape():
             element = element.replace(",",".")
             element = element.replace(" €","")
             element = float(element)
-            global PRICE_UNDER
 
             if element < PRICE_UNDER:
 
@@ -76,6 +75,7 @@ def scrape():
                 message_url = BOT_URL + 'sendMessage'
                 requests.post(message_url, json=json_data)
 
+                global PRICE_UNDER = element
                 PRICE_UNDER = element
 
         time.sleep(DELAY)
