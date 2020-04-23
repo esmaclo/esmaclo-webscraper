@@ -14,7 +14,7 @@ BOT_URL = f'https://api.telegram.org/bot{os.environ["BOT_KEY"]}/'
 CHAT_ID = 274429781
 DELAY = 60
 NUM_OF_TIMES = 10
-PRICE_UNDER = 30,0
+PRICE_UNDER = 30.0
 URL = 'https://www.amazon.es/dp/B07X8CVLRP'
 
 options = Options()
