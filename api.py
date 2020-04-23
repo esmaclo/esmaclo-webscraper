@@ -15,7 +15,6 @@ CHAT_ID = 274429781
 DELAY = 60
 NUM_OF_TIMES = 10
 URL = 'https://www.amazon.es/dp/B07X8CVLRP'
-#price_under = 30.0
 
 options = Options()
 options.binary_location = GOOGLE_CHROME_BIN
@@ -75,14 +74,13 @@ def scrape():
                     "text": 'El precio de ' + URL + ' ha bajado a ' + str(element) + ' €.',
                 }
 
-                price_under = element
-                print(price_under)
-
                 message_url = BOT_URL + 'sendMessage'
                 requests.post(message_url, json=json_data)
 
-        time.sleep(DELAY)
+        price_under = element
+        print(price_under)
         i += 1
+        time.sleep(DELAY)
 
     return ''
 
