@@ -69,7 +69,7 @@ def scrape():
 
                 json_data = {
                     "chat_id": CHAT_ID,
-                    "text": 'El precio de ' + URL + ' ha bajado de ' + price_under + ' € a ' + element + ' €.',
+                    "text": 'El precio de ' + URL + ' ha bajado de ' + str(price_under) + ' € a ' + str(element) + ' €.',
                 }
 
                 message_url = BOT_URL + 'sendMessage'
