@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import time
 from flask import Flask, Response, request
 from flask_cors import CORS
 from selenium import webdriver
@@ -10,6 +11,9 @@ from selenium.webdriver.chrome.options import Options
 CHROMEDRIVER_PATH = os.environ.get('CHROMEDRIVER_PATH', '/usr/local/bin/chromedriver')
 GOOGLE_CHROME_BIN = os.environ.get('GOOGLE_CHROME_BIN', '/usr/bin/google-chrome')
 BOT_URL = f'https://api.telegram.org/bot{os.environ["BOT_KEY"]}/'
+CHAT_ID = 274429781
+DELAY = 60
+NUM_OF_TIMES = 10
 
 options = Options()
 options.binary_location = GOOGLE_CHROME_BIN
@@ -41,23 +45,28 @@ def index():
 
 @app.route('/', methods=['POST'])
 def scrape():
-    data = request.json
+    #data = request.json
 
-    print(data)
-    chat_id = data['message']['chat']['id']
-    message = data['message']['text']
+    #print(data)
+    #chat_id = data['message']['chat']['id']
+    #message = data['message']['text']
 
-    element = scrape_amazon_price(message)
+    i = 0
+    while i < NUM_OF_TIMES:
+        element = scrape_amazon_price(message)
 
-    status = 200 if element is not None else 412
+        status = 200 if element is not None else 412
 
-    json_data = {
-        "chat_id": chat_id,
-        "text": element,
-    }
+        json_data = {
+            "chat_id": CHAT_ID,
+            "text": element,
+        }
 
-    message_url = BOT_URL + 'sendMessage'
-    requests.post(message_url, json=json_data)
+        message_url = BOT_URL + 'sendMessage'
+        requests.post(message_url, json=json_data)
+
+        time.sleep(DELAY)
+        i += 1
 
     return ''
 
