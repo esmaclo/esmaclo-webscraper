@@ -61,21 +61,21 @@ def scrape():
 
     return ''
 
-@app.route("/api/scrape", methods=['POST'])
-def scrape():
-    if request.json is None:
-        error = {"Error": "Missing url"}
-        return Response(json.dumps(error), status=400, mimetype='application/json')
+#@app.route("/api/scrape", methods=['POST'])
+#def scrape():
+#    if request.json is None:
+#        error = {"Error": "Missing url"}
+#        return Response(json.dumps(error), status=400, mimetype='application/json')
 
-    url = request.json.get('url', None)
-    print(url)
-    element = scrape_amazon_price(message)
+#    url = request.json.get('url', None)
+#    print(url)
+#    element = scrape_amazon_price(message)
 
-    status = 200 if element is not None else 412
+#    status = 200 if element is not None else 412
 
-    response = json.dumps({'Price': element})
+#    response = json.dumps({'Price': element})
 
-    return Response(response=response, status=status, mimetype='application/json')
+#    return Response(response=response, status=status, mimetype='application/json')
 
 
 if __name__ == '__main__':
