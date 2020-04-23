@@ -15,9 +15,7 @@ CHAT_ID = 274429781
 DELAY = 60
 NUM_OF_TIMES = 10
 URL = 'https://www.amazon.es/dp/B07X8CVLRP'
-
-global price_under
-price_under = 30.0
+#price_under = 30.0
 
 options = Options()
 options.binary_location = GOOGLE_CHROME_BIN
@@ -56,7 +54,9 @@ def scrape():
     #message = data['message']['text']
 
     i = 0
+    price_under = 30.0
     while i < NUM_OF_TIMES:
+        print(price_under)
         element = scrape_amazon_price(URL)
 
         status = 200 if element is not None else 412
@@ -72,7 +72,7 @@ def scrape():
 
                 json_data = {
                     "chat_id": CHAT_ID,
-                    "text": 'El precio de ' + URL + ' ha bajado de ' + str(price_under) + ' € a ' + str(element) + ' €.',
+                    "text": 'El precio de ' + URL + ' ha bajado a ' + str(element) + ' €.',
                 }
 
                 price_under = element
