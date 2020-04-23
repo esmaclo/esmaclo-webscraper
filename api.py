@@ -14,6 +14,7 @@ BOT_URL = f'https://api.telegram.org/bot{os.environ["BOT_KEY"]}/'
 CHAT_ID = 274429781
 DELAY = 60
 NUM_OF_TIMES = 10
+URL = 'https://www.amazon.es/dp/B07X8CVLRP'
 
 options = Options()
 options.binary_location = GOOGLE_CHROME_BIN
@@ -53,7 +54,7 @@ def scrape():
 
     i = 0
     while i < NUM_OF_TIMES:
-        element = scrape_amazon_price(message)
+        element = scrape_amazon_price(URL)
 
         status = 200 if element is not None else 412
 
