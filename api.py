@@ -41,17 +41,17 @@ def scrape_amazon_price(url):
     return element
 
 
-@app.route("/")
-def index():
-    return 'Scraper alive!'
+#@app.route("/")
+#def index():
+#    return 'Scraper alive!'
 
 
 #@app.route("/api/scrape", methods=['POST'])
 @app.route('/', methods=['POST'])
 def scrape():
-    if request.json is None:
-        error = {"Error": "Missing url"}
-        return Response(json.dumps(error), status=400, mimetype='application/json')
+    #if request.json is None:
+    #    error = {"Error": "Missing url"}
+    #    return Response(json.dumps(error), status=400, mimetype='application/json')
 
     data = request.json
 
