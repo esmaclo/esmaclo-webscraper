@@ -46,7 +46,8 @@ def index():
     return 'Scraper alive!'
 
 
-@app.route("/api/scrape", methods=['POST'])
+#@app.route("/api/scrape", methods=['POST'])
+@app.route('/', methods=['POST'])
 def scrape():
     if request.json is None:
         error = {"Error": "Missing url"}
