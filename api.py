@@ -75,7 +75,7 @@ def scrape():
                 message_url = BOT_URL + 'sendMessage'
                 requests.post(message_url, json=json_data)
 
-                global PRICE_UNDER = element
+                global PRICE_UNDER
                 PRICE_UNDER = element
 
         time.sleep(DELAY)
