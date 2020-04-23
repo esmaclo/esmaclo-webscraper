@@ -15,6 +15,8 @@ CHAT_ID = 274429781
 DELAY = 60
 NUM_OF_TIMES = 10
 URL = 'https://www.amazon.es/dp/B07X8CVLRP'
+
+global price_under
 price_under = 30.0
 
 options = Options()
@@ -53,7 +55,6 @@ def scrape():
     #chat_id = data['message']['chat']['id']
     #message = data['message']['text']
 
-    global price_under
     i = 0
     while i < NUM_OF_TIMES:
         element = scrape_amazon_price(URL)
